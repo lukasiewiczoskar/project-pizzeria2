@@ -412,17 +412,7 @@
 			thisCart.dom.secTotalPrice.innerHTML = thisCart.totalPrice
 		}
 
-    remove(event){
-      const thisCart = this;
 
-      event.dom.wrapper.remove();
-
-      const removeProduct = thisCart.products.indexOf(event);
-
-      thisCart.products.splice(removeProduct, 1);
-
-      thisCart.update();
-    } 
 	}
 	class CartProduct {
 		constructor(menuProduct, element) {
