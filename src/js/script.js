@@ -1,7 +1,7 @@
 /* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
 
 {
-	;('use strict')
+	('use strict')
 
 	const select = {
 		templateOf: {
@@ -70,14 +70,19 @@
 		amountWidget: {
 			defaultValue: 1,
 			defaultMin: 1,
-			defaultMax: 9,
+			defaultMax: 9, 
 		}, // CODE CHANGED
 		// CODE ADDED START
 		cart: {
 			defaultDeliveryFee: 20,
 		},
 		// CODE ADDED END
-	}
+    db: {
+      url: '//localhost:3131',
+      products: 'products',
+      orders: 'orders',
+    },
+	} 
 
 	const templates = {
 		menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
@@ -343,7 +348,7 @@
 		}
 
 		getElements(element) {
-			const thisCart = this;
+			const thisCart = this
 
 			thisCart.dom = {
 				toggleTrigger: element.querySelector(select.cart.toggleTrigger),
@@ -353,6 +358,9 @@
 				totalPrice: element.querySelector(select.cart.totalPrice),
 				secTotalPrice: element.querySelectorAll(select.cart.totalPrice)[1],
 				totalNumber: element.querySelector(select.cart.totalNumber),
+				form: element.querySelector(select.cart.form),
+				address:element.querySelector(select.cart.address),
+				phone:element.querySelector(select.cart.phone),
 			}
 			thisCart.dom.wrapper = element
 		}
@@ -361,13 +369,17 @@
 			const thisCart = this
 
 			thisCart.dom.toggleTrigger.addEventListener('click', function () {
-				thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive)
+				thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
 			})
 			thisCart.dom.productList.addEventListener('updated', function () {
-				thisCart.update()
+				thisCart.update();
 			})
 			thisCart.dom.productList.addEventListener('remove', function (event) {
-				thisCart.remove(event.detail.cartProduct)
+				thisCart.remove(event.detail.cartProduct);
+			})
+			thisCart.dom.form.addEventListener('submit', function(event){
+				event.preventDefault();
+				thisCart.sendOrder();
 			})
 		}
 
@@ -412,17 +424,49 @@
 			thisCart.dom.secTotalPrice.innerHTML = thisCart.totalPrice
 		}
 
-    remove(event){
-      const thisCart = this;
+		remove(event) {
+			const thisCart = this
 
-      event.dom.wrapper.remove();
+			event.dom.wrapper.remove()
 
-      const removeProduct = thisCart.products.indexOf(event);
+			const removeProduct = thisCart.products.indexOf(event)
 
-      thisCart.products.splice(removeProduct, 1);
+			thisCart.products.splice(removeProduct, 1)
 
-      thisCart.update();
-    } 
+			thisCart.update()
+		}
+		sendOrder(){
+			const thisCart = this;
+
+			const url = settings.db.url + '/' + settings.db.orders;
+
+			const payload = {
+				address: thisCart.dom.address.value,
+				phone: thisCart.dom.phone.value,
+				totalPrice: thisCart.totalPrice,
+				subtotalPrice: thisCart.totalPrice - settings.cart.defaultDeliveryFee,
+				totalNumber: thisCart.totalNumber,
+				deliveryFee: settings.cart.defaultDeliveryFee,
+				products: [],
+			};
+			for(let prod of thisCart.products){
+				payload.products.push(prod.getData());
+			}
+			const options = { 
+			 method: 'POST',
+			 headers: {
+				'Content-Type': 'application/json',
+			 },
+			 body: JSON.stringify(payload)
+			};
+
+			fetch(url, options)
+				.then(function(response){
+					return response.json();
+				}).then(function(parsedResponse){
+					console.log('parsedResponse', parsedResponse)
+				});
+		}
 	}
 	class CartProduct {
 		constructor(menuProduct, element) {
@@ -488,6 +532,19 @@
 				thisCartProduct.remove()
 			})
 		}
+		getData(){
+			const thisCartProduct = this;
+
+			const productSummary = {
+				id: thisCartProduct.id,
+				name: thisCartProduct.name,
+				amount: thisCartProduct.amount,
+				priceSingle: thisCartProduct.priceSingle,
+				price: thisCartProduct.price,
+				params: thisCartProduct.Params,
+			}
+			return productSummary;
+		}
 	}
 
 	const app = {
@@ -495,14 +552,27 @@
 			const thisApp = this
 
 			for (let productData in thisApp.data.products) {
-				new Product(productData, thisApp.data.products[productData])
+				new Product(thisApp.data.products[productData].id, thisApp.data.products[productData])
 			}
 		},
 
 		initData: function () {
 			const thisApp = this
 
-			thisApp.data = dataSource
+			thisApp.data = {};
+			const url = settings.db.url + '/' + settings.db.products;
+
+			fetch(url)
+				.then(function(rawResponse){
+					return rawResponse.json();
+				})
+				.then(function(parsedResponse){
+					console.log('parsedResponse', parsedResponse); // eslint-disable-line no-console
+
+					thisApp.data.products = parsedResponse;
+
+					thisApp.initMenu();
+				})
 		},
 
 		initCart: function () {
@@ -515,9 +585,8 @@
 		init: function () {
 			const thisApp = this
 
-			thisApp.initData()
-			thisApp.initMenu()
-			thisApp.initCart()
+			thisApp.initData();
+			thisApp.initCart();
 		},
 	}
 
