@@ -1,0 +1,492 @@
+.header-template {
+    margin: ($base-size / 2) 0;
+    // padding: ($base-size * 6) ($base-size * 4);
+    background: $color-light;
+    border-bottom: 1px solid lighten($color-dark, 70%);
+    border-radius: $radius;
+  
+  }
+  
+  .twoimages{
+    max-width: 700px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 5px;
+  
+    .img1 {
+      background-image: url('../images/pizza-1.jpg');
+      background-size: cover;
+      background-position: center;
+      width: 324px;
+      height: 130px;
+      // object-fit: cover;
+      transition-duration: 0.5s;
+      border-radius: 5px;
+  
+      .text{
+        text-decoration: none;
+        display: block;
+        text-align: center;
+        line-height: 120px;
+        color: white;
+        font-size: 20px;
+      }
+  
+    }
+  
+    .img2 {
+      background-image: url('../images/pizza-2.jpg');
+      background-size: cover;
+      background-position: center;
+      width: 324px;
+      height: 130px;
+      object-fit: cover;
+      border-radius: 5px;
+  
+      .text{
+        text-decoration: none;
+        display: block;
+        text-align: center;
+        line-height: 120px;
+        text-align: center;
+        color: white;
+        font-size: 20px;
+      }
+    }
+  
+    a{
+      transition-duration: 0.5s;
+    }
+  
+    a:hover {
+      transform: translateY(-30px);
+    }
+  
+    p{
+      color: white;
+      transition-duration: 0.5s;
+      text-align: center;
+      transform: translateY(30px);
+      opacity: 0;
+    }
+  
+    .img1:hover p{
+      display: block;
+      transform: translateY(-60px);
+      color: white;
+      font-weight: 600;
+      align-items: center;
+      opacity: 1;
+    }
+  
+    .img2:hover p {
+      display: block;
+      transform: translateY(-60px);
+      color: white;
+      font-weight: 600;
+      align-items: center;
+      opacity: 1;
+    }
+  }
+  
+  .singleimage{
+  
+    padding-top: 10px;
+    background-color: rgb(255, 60, 0);
+    height: 130px;
+    width: 100%;
+    text-align: center;
+    font-weight: 60px;
+    color: white;
+  
+  }
+  
+  .carousel{
+  
+    margin: ($base-size / 2) 0;
+    // padding: ($base-size * 6) ($base-size * 4);
+    background: $color-light;
+    border-bottom: 1px solid lighten($color-dark, 70%);
+    border-radius: $radius;
+  
+    .main-carousel {
+  
+      background-color: #f2f2f2;;
+  
+    }
+  
+    .carousel-cell{
+  
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 10px 0;
+      width: 100%;
+  
+      .carousel-cell-image{
+  
+        background-position: center;
+        object-fit: cover;
+        width: 324px;
+        height: 200px;
+        background-image: url('../images/pizza-3.jpg');
+  
+      }
+  
+      .carousel-cell-text {
+  
+        padding-left: 10px;
+        width: 324px;
+  
+      }
+  
+    }
+  
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 101%;
+    width: 101%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    transition-duration: 0.5s;
+  
+  }
+  
+  .sectiongallery1 {
+    padding-top: 50px;
+    margin: ($base-size / 2) 0;
+    // padding: ($base-size * 6) ($base-size * 4);
+    background: $color-light;
+    border-bottom: 1px solid lighten($color-dark, 70%);
+    border-radius: $radius;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  
+  
+    background-color: #f2f2f2;
+  
+  
+    .imagecontainer1 {
+  
+      background-image: url('../images/pizza-4.jpg');
+      height: 200px;
+      width: 200px;
+      object-fit: cover;
+      background-position: center;
+  
+      .iconspace{
+        position: relative;
+        height: 200px;
+        width: 200px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        color: #ff6b6b;
+        transition-duration: 0.5s;
+  
+        i {
+  
+          display: none;
+          padding: 6px;
+        }
+  
+      }
+  
+      .overlay:hover {
+  
+        background-color: rgba(0,0,0,0.5);
+        z-index: 10;
+  
+      }
+  
+      .iconspace:hover i {
+  
+        display: block;
+  
+      }
+  
+      .iconspace:hover i + i {
+        display: block;
+        color: white;
+      }
+  
+    }
+  
+  
+    .imagecontainer2 {
+  
+      background-image: url('../images/pizza-5.jpg');
+      object-fit: cover;
+      background-position: center;
+  
+      .iconspace{
+        position: relative;
+        height: 200px;
+        width: 200px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        color: #ff6b6b;
+        transition-duration: 0.5s;
+  
+        i {
+  
+          display: none;
+          padding: 6px;
+        }
+  
+      }
+  
+      .overlay:hover {
+  
+        background-color: rgba(0,0,0,0.5);
+        z-index: 10;
+      }
+  
+  
+      .iconspace:hover i {
+  
+        display: block;
+      }
+  
+      .iconspace:hover i + i {
+        display: block;
+        color: white;
+      }
+  
+    }
+  
+    .imagecontainer3 {
+  
+      background-image: url('../images/pizza-6.jpg');
+      object-fit: cover;
+      background-position: center;
+  
+      .iconspace{
+        position: relative;
+        height: 200px;
+        width: 200px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        color: #ff6b6b;
+        transition-duration: 0.5s;
+  
+        i {
+          display: none;
+          padding: 6px;
+        }
+      }
+  
+      .overlay:hover {
+        background-color: rgba(0,0,0,0.5);
+        z-index: 10;
+      }
+  
+      .iconspace:hover i {
+  
+        display: block;
+  
+      }
+  
+      .iconspace:hover i + i {
+        display: block;
+        color: white;
+      }
+  
+    }
+  
+  }
+  
+  .sectiongallery2 {
+  
+    margin: ($base-size / 2) 0;
+    // padding: ($base-size * 6) ($base-size * 4);
+    background: $color-light;
+    border-bottom: 1px solid lighten($color-dark, 70%);
+    border-radius: $radius;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2px;
+    background-color: #f2f2f2;
+  
+    .imagecontainer4 {
+  
+      background-image: url('../images/pizza-7.jpg');
+      height: 200px;
+      width: 200px;
+      object-fit: cover;
+      background-position: center;
+  
+      .iconspace{
+  
+        position: relative;
+        height: 200px;
+        width: 200px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        color: #ff6b6b;
+        transition-duration: 0.5s;
+  
+        i {
+  
+          display: none;
+          padding: 6px;
+  
+        }
+  
+        .iconspace:hover i + i {
+  
+          display: block;
+          color: white;
+  
+        }
+  
+  
+      }
+  
+      .overlay:hover {
+  
+        background-color: rgba(0,0,0,0.5);
+        z-index: 10;
+  
+      }
+  
+      .iconspace:hover i {
+  
+        display: block;
+  
+      }
+  
+      .iconspace:hover i + i {
+  
+        display: block;
+        color: white;
+  
+      }
+  
+    }
+  
+    .imagecontainer5 {
+  
+      background-image: url('../images/pizza-8.jpg');
+      object-fit: cover;
+      background-position: center;
+  
+      .iconspace{
+        position: relative;
+        height: 200px;
+        width: 200px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        color: #ff6b6b;
+        transition-duration: 0.5s;
+  
+        i {
+  
+          display: none;
+          padding: 6px;
+        }
+  
+      }
+  
+      .overlay:hover {
+  
+        background-color: rgba(0,0,0,0.5);
+        z-index: 10;
+      }
+  
+  
+      .iconspace:hover i {
+  
+        display: block;
+  
+      }
+  
+      .iconspace:hover i + i {
+  
+        display: block;
+        color: white;
+  
+      }
+  
+    }
+  
+    .imagecontainer6 {
+  
+      background-image: url('../images/pizza-9.jpg');
+      object-fit: cover;
+      background-position: center;
+  
+      .iconspace{
+        position: relative;
+        height: 200px;
+        width: 200px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        color: $color-main;
+        transition-duration: 0.5s;
+  
+        i {
+  
+          display: none;
+          padding: 6px;
+        }
+  
+      }
+  
+      .overlay:hover {
+  
+        background-color: rgba(0,0,0,0.5);
+        z-index: 10;
+  
+      }
+  
+      .iconspace:hover i {
+  
+        display: block;
+  
+      }
+  
+      .iconspace:hover i + i {
+  
+        display: block;
+        color: white;
+  
+      }
+  
+    }
+  
+  }
+  
+  footer {
+  
+    margin-top: 30px;
+  
+  }
+  
+  
+  footer a{
+  
+    color: $color-main;
+    text-decoration: none;
+  
+  }

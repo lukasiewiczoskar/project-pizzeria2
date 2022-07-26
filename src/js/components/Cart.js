@@ -78,7 +78,7 @@ class Cart {
 
 	update() {
 		const thisCart = this
-
+ 		debugger
 		thisCart.deliveryFee = settings.cart.defaultDeliveryFee
 		thisCart.totalNumber = 0
 		thisCart.subtotalPrice = 0
@@ -86,15 +86,12 @@ class Cart {
 		for (let product of thisCart.products) {
 			thisCart.totalNumber += product.amount
 			thisCart.subtotalPrice += product.price
-			console.log('totalNumber: ', thisCart.totalNumber)
-			console.log('subtotalPrice: ', thisCart.subtotalPrice)
 		}
-		if (thisCart.subtotalPrice !== 0) {
+		if (thisCart.totalNumber !== 0) {
 			thisCart.totalPrice = thisCart.subtotalPrice + thisCart.deliveryFee
 		} else {
 			thisCart.totalPrice = 0
 		}
-		console.log('thisCart.totalPrice: ', thisCart.totalPrice)
 
 		thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber
 		thisCart.dom.subtotalPrice.innerHTML = thisCart.subtotalPrice
@@ -107,12 +104,12 @@ class Cart {
 	remove(removedProduct) {
 		const thisCart = this
 
-		console.log('removedProduct: ', removedProduct)
+
 
 		const indexOfRemovedProduct = thisCart.products.indexOf(removedProduct)
-		console.log('indexOfRemovedProduct: ', indexOfRemovedProduct)
+
 		const removedValues = thisCart.products.splice(indexOfRemovedProduct, 1)
-		console.log('removedValues: ', removedValues)
+
 		removedProduct.dom.wrapper.remove()
 
 		thisCart.update()
